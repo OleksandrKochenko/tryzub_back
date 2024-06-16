@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const handleMongooseError = require("../midlewares/handleMongooseError");
 
 const emailRegEx = /^\S+@\S+\.\S+$/;
 
@@ -40,6 +41,8 @@ const eventSchema = Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
+eventSchema.post("save", handleMongooseError);
 
 const Event = model("events", eventSchema);
 
