@@ -33,7 +33,7 @@ const getEvents = async (req, res, next) => {
         break;
     }
 
-    res.json({ today, up, past, emphasize, events: events });
+    res.json(events);
   } catch (error) {
     next(error);
   }
