@@ -5,7 +5,8 @@ const getEvents = async (req, res, next) => {
   let events;
   try {
     const { up = false, past = false, emphasize = false } = req.query;
-    const today = new Date().getTime();
+    const toPast90Days = 3 * 30 * 24 * 60 * 60 * 1000;
+    const today = new Date().getTime() - toPast90Days;
     switch (true) {
       case emphasize !== false:
         events = await Event.find(
