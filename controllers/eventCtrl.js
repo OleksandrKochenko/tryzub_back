@@ -63,4 +63,18 @@ const getEventById = async (req, res, next) => {
   }
 };
 
-module.exports = { getEvents, getEventById };
+const getNews = async (req, res, next) => {
+  try {
+    const news = await Event.find(
+      {
+        pressRelease: { $exists: true },
+      },
+      "title pressRelease coverImg startDate endDate"
+    ).sort({ startDate: 1 });
+    res.json(news);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getEvents, getEventById, getNews };
